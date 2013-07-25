@@ -25,3 +25,9 @@ At least 2 of those links are much harder to scrape than the other two.
 * Make your code as small as possible (yay golfing!)
 * Push your code and make a second pull request
 
+## Bonus points
+
+* Use a gem or scraping tool that nobody else used
+* Create the smallest code in step 2
+* Create the audience nominated best code
+* Create the audience nominated best tests (or the tests that the most people use)
