@@ -9,7 +9,7 @@ Here are a couple links:
 * [New Relic](http://newrelic.com/about/jobs)
 * [Puppet Labs](https://puppetlabs.com/company/careers/)
 
-At least 2 of those links are much harder to scrape than the other two. 
+_At least 2 of those links are much harder to scrape than the other two._
 
 ## Process
 
