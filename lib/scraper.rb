@@ -5,13 +5,13 @@ class Scraper
 
   def self.scrape
     doc = Nokogiri::HTML(open(base_url))
-    parse(doc)
+    return doc.css(css_selector).map do |link|
+      parse(link)
+    end
   end
 
-  def self.parse(doc)
-    return doc.css(css_selector).map do |link|
-      [link.content.strip, link.attr("href")]
-    end
+  def self.parse(link)
+    raise "Abstract"
   end
 
 end
@@ -26,6 +26,10 @@ class NewRelicScraper < Scraper
     '#gnewtonCareerBody a'
   end
 
+  def self.parse(link)
+    [link.content.strip, link.attr("href")]
+  end
+
 end
 
 class CrowdCompassScraper < Scraper
@@ -37,10 +41,8 @@ class CrowdCompassScraper < Scraper
     'channel item'
   end
 
-  def self.parse(doc)
-    return doc.css(css_selector).map do |link|
-      [(link/'title').first.content, link.children[2].content.strip]
-    end
+  def self.parse(link)
+    [(link/'title').first.content, link.children[2].content.strip]
   end
 end
 
@@ -53,9 +55,7 @@ class PuppetLabsScraper < Scraper
     'jobfeed jobs job'
   end
 
-  def self.parse(doc)
-    return doc.css(css_selector).map do |link|
-      [(link/'title').first.content, (link/'apply_url').first.content]
-    end
+  def self.parse(link)
+    [(link/'title').first.content, (link/'apply_url').first.content]
   end
 end
