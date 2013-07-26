@@ -1,4 +1,4 @@
-mechanize_code_challenge
+Screen Scraping Code Challenge
 ========================
 
 Your challenge, should you accept it, is to create a script that scrapes a jobs board to find out if they have internship positions open. Naturally, a very abstract, unhelpful code challenge. :)
