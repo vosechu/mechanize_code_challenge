@@ -9,13 +9,14 @@ Here are a couple links:
 * [New Relic](http://newrelic.com/about/jobs)
 * [Puppet Labs](https://puppetlabs.com/company/careers/)
 
-_At least 2 of those links are much harder to scrape than the other two._
+_At least 2 of those links are much harder to scrape than the other one._
 
 ## Process
 
 ### Step 1
 
 * Fork and clone this repo
+* Pick ONE job board to scrape
 * Create your code with tests
 * Send me a pull request
 
