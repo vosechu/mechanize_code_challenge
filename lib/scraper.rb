@@ -5,6 +5,10 @@ class Scraper
 
   def self.scrape
     doc = Nokogiri::HTML(open(base_url))
+    parse(doc)
+  end
+
+  def self.parse(doc)
     return doc.css(css_selector).map do |link|
       [link.content.strip, link.attr("href")]
     end
@@ -22,4 +26,20 @@ class NewRelicScraper < Scraper
     '#gnewtonCareerBody a'
   end
 
+end
+
+class CrowdCompassScraper < Scraper
+  def self.base_url
+    'https://ch.tbe.taleo.net/CH06/ats/servlet/Rss?org=CVENT2&cws=40'
+  end
+
+  def self.css_selector
+    'channel item'
+  end
+
+  def self.parse(doc)
+    return doc.css(css_selector).map do |link|
+      [(link/'title').first.content, link.children[2].content.strip]
+    end
+  end
 end

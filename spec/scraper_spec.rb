@@ -75,3 +75,15 @@ describe "NewRelicScraper", :vcr do
     jobs.should be_a Array
   end
 end
+
+describe "CrowdCompassScraper", :vcr do
+  before(:each) do
+    @scraper = CrowdCompassScraper
+  end
+
+  it "should be able to get an array of jobs" do
+    jobs = @scraper.scrape
+    jobs.first.should eq(["Front End Web Developer", "http://ch.tbe.taleo.net/CH06/ats/careers/requisition.jsp?org=CVENT2&cws=40&rid=784"])
+    jobs.should be_a Array
+  end
+end
