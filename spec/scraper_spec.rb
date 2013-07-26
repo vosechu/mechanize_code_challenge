@@ -1,5 +1,16 @@
 require 'rspec'
+require 'vcr'
 require './lib/scraper'
+
+VCR.configure do |c|
+  c.cassette_library_dir = 'spec/vcr_cassettes'
+  c.hook_into :webmock # or :fakeweb
+  c.configure_rspec_metadata!
+end
+
+RSpec.configure do |c|
+  c.treat_symbols_as_metadata_keys_with_true_values = true
+end
 
 describe "Scraper" do
   before(:each) do
@@ -22,7 +33,7 @@ describe "NewScraper" do
     end
   end
 
-  context "when it has valid base_url and css_selector methods" do
+  context "when it has valid base_url and css_selector methods", :vcr do
     before(:each) do
       @scraper = Class.new(Scraper) do
         def self.base_url
@@ -47,7 +58,7 @@ describe "NewScraper" do
   end
 end
 
-describe "NewRelicScraper" do
+describe "NewRelicScraper", :vcr do
   before(:each) do
     @scraper = NewRelicScraper
   end
@@ -59,6 +70,8 @@ describe "NewRelicScraper" do
   end
 
   it "should format scraped results into an array" do
-
+    jobs = @scraper.scrape
+    jobs.first.should eq(["Agent SDK Engineer", "http://newton.newtonsoftware.com/career/JobIntroduction.action?clientId=4028f88b20d6768d0120f7ae45e50365&id=8a42a12b3fa43372013fbf737b7a6b21&gnewtonResize=http://newton.newtonsoftware.com/career/GnewtonResize.htm&source="])
+    jobs.should be_a Array
   end
 end
