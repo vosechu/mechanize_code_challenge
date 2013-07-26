@@ -43,3 +43,19 @@ class CrowdCompassScraper < Scraper
     end
   end
 end
+
+class PuppetLabsScraper < Scraper
+  def self.base_url
+    'https://www.jobscore.com/jobs/puppetlabs/feed.xml'
+  end
+
+  def self.css_selector
+    'jobfeed jobs job'
+  end
+
+  def self.parse(doc)
+    return doc.css(css_selector).map do |link|
+      [(link/'title').first.content, (link/'apply_url').first.content]
+    end
+  end
+end

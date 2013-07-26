@@ -87,3 +87,15 @@ describe "CrowdCompassScraper", :vcr do
     jobs.should be_a Array
   end
 end
+
+describe "PuppetLabsScraper", :vcr do
+  before(:each) do
+    @scraper = PuppetLabsScraper
+  end
+
+  it "should be able to get an array of jobs" do
+    jobs = @scraper.scrape
+    jobs.first.should eq(["Professional Services Engineer (Boston)", "http://www.jobscore.com/job_seeker/jobs/apply_jump_page?job_id=cYhvqeTPir4OK0iGakhP3Q&ref=rss&sid=68"])
+    jobs.should be_a Array
+  end
+end
